@@ -1,0 +1,1200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Halal accreditation: applicant app (mobile wireframe)</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        html {
+            background: #D9DDDB
+        }
+
+        body {
+            margin: 0;
+            color: #1F2423;
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 15px;
+            line-height: 1.45
+        }
+
+        h1,
+        h2,
+        h3,
+        p,
+        ul,
+        ol {
+            margin: 0;
+            padding: 0
+        }
+
+        ul,
+        ol {
+            list-style: none
+        }
+
+        button {
+            font: inherit;
+            cursor: pointer
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid #1E6B52;
+            outline-offset: 2px
+        }
+
+        [hidden] {
+            display: none !important
+        }
+
+        /* Phone column: full width on a phone, centred 430px column on a desktop */
+        .device {
+            position: relative;
+            max-width: 430px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background: #EEF0EF;
+            padding-bottom: calc(72px + env(safe-area-inset-bottom));
+            box-shadow: 0 0 0 1px #B5BCB9
+        }
+
+        .appbar {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 56px;
+            padding: 0 8px 0 16px;
+            background: #fff;
+            border-bottom: 1px solid #C5CBC8
+        }
+
+        .appbar h1 {
+            flex: 1;
+            font-size: 18px;
+            font-weight: 600
+        }
+
+        .icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: #1F2423
+        }
+
+        .icon-btn:hover {
+            background: #F2F4F3
+        }
+
+        .view {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px
+        }
+
+        .tabbar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 6;
+            display: flex;
+            width: 100%;
+            max-width: 430px;
+            background: #fff;
+            border-top: 1px solid #C5CBC8;
+            padding-bottom: env(safe-area-inset-bottom)
+        }
+
+        .tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            min-height: 64px;
+            padding: 6px 2px;
+            border: 0;
+            background: transparent;
+            color: #4F5754;
+            font-size: 11px;
+            font-weight: 500
+        }
+
+        .tab svg {
+            stroke: currentColor
+        }
+
+        .tab-on {
+            color: #1E6B52;
+            font-weight: 600;
+            box-shadow: inset 0 3px 0 #1E6B52
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #C5CBC8;
+            border-radius: 12px;
+            padding: 16px
+        }
+
+        .h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px
+        }
+
+        .sub {
+            font-size: 13px;
+            color: #4F5754;
+            margin-bottom: 12px
+        }
+
+        .muted {
+            color: #4F5754
+        }
+
+        .mono {
+            font-family: 'IBM Plex Mono', monospace
+        }
+
+        .stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .between {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 48px;
+            padding: 0 16px;
+            border: 1px solid #8A938F;
+            border-radius: 8px;
+            background: #fff;
+            color: #1F2423;
+            font-weight: 500
+        }
+
+        .btn:hover {
+            background: #F2F4F3
+        }
+
+        .btn-primary {
+            background: #1E6B52;
+            border-color: #1E6B52;
+            color: #fff
+        }
+
+        .btn-primary:hover {
+            background: #17553F
+        }
+
+        .btn-on {
+            background: #E3F2EC;
+            border-color: #1E6B52;
+            color: #14533F
+        }
+
+        .btn-inline {
+            width: auto
+        }
+
+        .row-btns {
+            display: flex;
+            gap: 8px
+        }
+
+        .row-btns .btn {
+            flex: 1
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid;
+            white-space: nowrap
+        }
+
+        .b-ok {
+            background: #E3F2EC;
+            color: #14533F;
+            border-color: #8FC3AE
+        }
+
+        .b-warn {
+            background: #FFF1CC;
+            color: #6B4500;
+            border-color: #E0B84F
+        }
+
+        .b-bad {
+            background: #FBE3E3;
+            color: #8C1D1D;
+            border-color: #E09A9A
+        }
+
+        .b-neutral {
+            background: #EEF0EF;
+            color: #3B4240;
+            border-color: #B5BCB9
+        }
+
+        .ai {
+            display: inline-block;
+            padding: 1px 6px;
+            border: 1px solid #1E6B52;
+            border-radius: 4px;
+            background: #fff;
+            color: #1E6B52;
+            font: 500 11px 'IBM Plex Mono', monospace;
+            letter-spacing: .04em
+        }
+
+        .ph {
+            background: #E1E5E3;
+            border-radius: 4px
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4F5754
+        }
+
+        .inp {
+            width: 100%;
+            min-height: 48px;
+            padding: 0 12px;
+            border: 1px solid #8A938F;
+            border-radius: 8px;
+            background: #fff;
+            color: #1F2423;
+            font: inherit;
+            font-size: 16px
+        }
+
+        textarea.inp {
+            padding: 10px 12px;
+            min-height: 88px;
+            resize: vertical
+        }
+
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+            background: #E1E5E3;
+            overflow: hidden
+        }
+
+        .progress i {
+            display: block;
+            height: 100%;
+            background: #1E6B52
+        }
+
+        .steps li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #DDE1DF
+        }
+
+        .steps li:last-child {
+            border-bottom: 0
+        }
+
+        .dot {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 999px;
+            border: 2px solid #8A938F;
+            font-size: 12px;
+            font-weight: 600;
+            color: #4F5754;
+            background: #fff
+        }
+
+        .dot-done {
+            background: #1E6B52;
+            border-color: #1E6B52;
+            color: #fff
+        }
+
+        .dot-now {
+            border-color: #1E6B52;
+            color: #1E6B52
+        }
+
+        .list-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            min-height: 56px;
+            padding: 10px 12px;
+            text-align: left;
+            border: 1px solid #C5CBC8;
+            border-radius: 8px;
+            background: #fff;
+            color: #1F2423
+        }
+
+        .list-btn:hover {
+            background: #F2F4F3
+        }
+
+        .list-btn-on {
+            border-color: #1E6B52;
+            background: #F2F8F5
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .chips .btn {
+            width: auto
+        }
+
+        .bubble {
+            max-width: 85%;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid #C5CBC8;
+            background: #fff
+        }
+
+        .bubble-me {
+            align-self: flex-end;
+            background: #E3F2EC;
+            border-color: #8FC3AE
+        }
+
+        .bubble small {
+            display: block;
+            margin-bottom: 2px;
+            font-size: 11px;
+            color: #4F5754
+        }
+
+        .composer {
+            position: sticky;
+            bottom: calc(64px + env(safe-area-inset-bottom));
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 12px;
+            margin: 0 -16px -16px;
+            background: #fff;
+            border-top: 1px solid #C5CBC8
+        }
+
+        .check {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 48px;
+            padding: 6px 0;
+            border-bottom: 1px solid #DDE1DF
+        }
+
+        .check:last-child {
+            border-bottom: 0
+        }
+
+        .check input {
+            width: 22px;
+            height: 22px;
+            flex: none
+        }
+
+        .qr {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 132px;
+            height: 132px;
+            margin: 0 auto;
+            border: 2px dashed #3B4240;
+            font-size: 13px
+        }
+
+        .locked-blur {
+            filter: blur(5px);
+            user-select: none;
+            pointer-events: none;
+            opacity: 0.6
+        }
+
+        dl {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 14px
+        }
+
+        dl div {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        dt {
+            color: #4F5754
+        }
+
+        dd {
+            margin: 0;
+            text-align: right
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background: rgba(31, 36, 35, .55)
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 360px;
+            background: #fff;
+            border: 1px solid #C5CBC8;
+            border-radius: 12px;
+            padding: 16px
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="device">
+        <header class="appbar">
+            <button id="back" class="icon-btn" aria-label="Back" hidden>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    aria-hidden="true">
+                    <path d="M15 5l-7 7 7 7" />
+                </svg>
+            </button>
+            <h1 id="title">Home</h1>
+            <button class="icon-btn" aria-label="Notifications">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    aria-hidden="true">
+                    <path d="M6 17v-6a6 6 0 0112 0v6l2 2H4z" />
+                    <path d="M10 21h4" />
+                </svg>
+            </button>
+        </header>
+
+        <main id="view" class="view"></main>
+
+        <nav id="tabs" class="tabbar" aria-label="Main"></nav>
+        <div id="modal"></div>
+    </div>
+
+    <script>
+        /* ------------------------------------------------------------------
+           App Configuration
+        ------------------------------------------------------------------- */
+        const TITLES = {
+            home: 'Home', apply: 'Apply', docs: 'Documents',
+            messages: 'Messages', certificate: 'Certificate', audit: 'Audit visit'
+        };
+
+        const TABS = [
+            { id: 'home', label: 'Home', icon: '<path d="M3 11l9-8 9 8v10H3z"/>' },
+            { id: 'apply', label: 'Apply', icon: '<path d="M6 3h9l4 4v14H6z"/><path d="M12 11v6M9 14h6"/>' },
+            { id: 'docs', label: 'Documents', icon: '<path d="M3 6h7l2 2h9v12H3z"/>' },
+            { id: 'messages', label: 'Messages', icon: '<path d="M4 4h16v12H9l-5 4z"/>' },
+            { id: 'certificate', label: 'Certificate', icon: '<circle cx="12" cy="9" r="6"/><path d="M8 14l-2 7 6-3 6 3-2-7"/>' }
+        ];
+
+        const SCOPES = ['Food manufacturing', 'Meat processing', 'Restaurant / catering', 'Beverage', 'Cosmetics'];
+        const AUDIT_ITEMS = [
+            'Halal and non-halal materials stored apart',
+            'Cleaning records for the last production runs',
+            'Supplier halal certificates, printed or on your phone',
+            'Ingredient lists for each product',
+            'Staff who handle halal products are available'
+        ];
+
+        const state = {
+            screen: 'home',
+            step: 0,
+            form: { name: '', reg: '', email: '', phone: '' },
+            scope: {},
+            products: [],
+            productDraft: '',
+            submitted: false,
+            docSel: null,
+            docs: [
+                { name: 'Business registration', state: 'missing', note: '' },
+                { name: 'HACCP plan', state: 'missing', note: '' },
+                { name: 'Supplier halal certificates', state: 'missing', note: '' },
+                { name: 'Cleaning procedure', state: 'missing', note: '' },
+                { name: 'Ingredient specification sheets', state: 'missing', note: '' }
+            ],
+            msgs: [],
+            draft: '',
+            prep: {},
+            auditDone: false,   // Tracks completion of Audit visit & Committee decision
+            certPaid: false,    // Tracks ₱500 payment to view certificate
+            renewalPaid: false, // Tracks separate payment for certificate renewal
+            aiQuestion: '',
+            aiChat: [],         // Stores Home screen "Ask the assistant" Q&A
+            aiLoading: false,
+            modal: null         // Custom modal state
+        };
+
+        const $ = (id) => document.getElementById(id);
+        const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        const docsReady = () => state.docs.filter((d) => d.state === 'ok').length;
+        const prepCount = () => Object.values(state.prep).filter(Boolean).length;
+        const isReadyForPayment = () => state.submitted && docsReady() === state.docs.length && state.auditDone;
+
+        /* ------------------------------------------------------------------
+           Screens
+        ------------------------------------------------------------------- */
+        function viewHome() {
+            const missing = state.docs.length - docsReady();
+            const allDocsReady = missing === 0;
+
+            // Dynamic pipeline without "Human review":
+            const pipelineSteps = [
+                state.submitted ? 'Application submitted' : 'Submit application',
+                'AI pre-check',
+                'Audit visit',
+                'Committee decision',
+                'Certificate issued'
+            ];
+
+            let currentStep = 0;
+            if (state.certPaid) {
+                currentStep = 5; // All steps done
+            } else if (state.submitted && allDocsReady && state.auditDone) {
+                currentStep = 4; // Audit & Committee decision done -> awaiting Certificate issuance payment
+            } else if (state.submitted && allDocsReady) {
+                currentStep = 2; // Moves directly to Audit visit
+            } else if (state.submitted) {
+                currentStep = 1; // Moves to AI pre-check
+            }
+
+            const steps = pipelineSteps.map((label, i) => {
+                const done = i < currentStep, now = i === currentStep;
+                return `<li>
+      <span class="dot ${done ? 'dot-done' : now ? 'dot-now' : ''}">${done ? '&#10003;' : i + 1}</span>
+      <span style="flex:1;${now ? 'font-weight:600' : ''}">${label}</span>
+      <span class="badge ${done ? 'b-ok' : now ? 'b-warn' : 'b-neutral'}">${done ? 'Done' : now ? 'In progress' : 'Next'}</span>
+    </li>`;
+            }).join('');
+
+            const aiHistory = state.aiChat.length ? `
+    <div class="stack" style="gap:8px;margin-bottom:12px;max-height:240px;overflow-y:auto">
+      ${state.aiChat.map((m) => `
+        <div class="bubble ${m.role === 'user' ? 'bubble-me' : ''}" style="max-width:92%;font-size:13px">
+          <small>${m.role === 'user' ? 'You' : '<span class="ai">AI</span> Assistant'}</small>
+          ${esc(m.text)}
+        </div>
+      `).join('')}
+    </div>` : '';
+
+            return `
+    <div>
+      <p class="muted" style="font-size:13px">Welcome</p>
+      <h2 style="font-size:22px;font-weight:600">${state.form.name ? esc(state.form.name) : '[Your company name]'}</h2>
+    </div>
+
+    <section class="card">
+      <div class="between" style="margin-bottom:8px">
+        <h2 class="h2" style="margin:0">Your application</h2>
+        <span class="mono muted" style="font-size:12px">[Application ref]</span>
+      </div>
+      <p class="sub">Initial accreditation</p>
+      <ol class="steps">${steps}</ol>
+    </section>
+
+    <section class="card">
+      <h2 class="h2">Action needed</h2>
+      <p class="sub">${state.submitted && allDocsReady ? 'All initial requirements complete. Ready for audit visit.' : 'Finish these to advance your application.'}</p>
+      <div class="stack" style="gap:8px">
+        <button class="list-btn" data-go="apply">
+          <span>${state.submitted ? 'Application form submitted' : 'Complete &amp; submit application form'}</span>
+          <span class="badge ${state.submitted ? 'b-ok' : 'b-warn'}">${state.submitted ? 'Done' : 'To do'}</span>
+        </button>
+        <button class="list-btn" data-go="docs">
+          <span>${missing ? `Upload ${missing} document${missing === 1 ? '' : 's'}` : 'All documents verified by AI'}</span>
+          <span class="badge ${missing ? 'b-warn' : 'b-ok'}">${missing ? 'To do' : 'Done'}</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="between" style="margin-bottom:8px">
+        <h2 class="h2" style="margin:0">Upcoming audit</h2>
+        <span class="badge ${state.auditDone ? 'b-ok' : state.submitted && allDocsReady ? 'b-warn' : 'b-neutral'}">${state.auditDone ? 'Completed' : state.submitted && allDocsReady ? 'Ready to schedule' : 'Pending'}</span>
+      </div>
+      <p class="sub">${state.auditDone ? 'Audit visit and committee review completed.' : 'To be scheduled'}</p>
+      <button class="btn" data-go="audit">${state.auditDone ? 'View audit details' : 'Prepare for the visit'}</button>
+    </section>
+
+    <section class="card">
+      <h2 class="h2">Ask the assistant <span class="ai">AI</span></h2>
+      <p class="sub">Ask questions about Halal requirements or your uploaded documents.</p>
+      ${aiHistory}
+      <div class="row-btns">
+        <input class="inp" data-input="aiQuestion" aria-label="Ask a question" placeholder="Ask a question..." value="${esc(state.aiQuestion)}" ${state.aiLoading ? 'disabled' : ''}>
+        <button class="btn btn-primary btn-inline" style="width:auto" data-askai="1" ${state.aiLoading ? 'disabled' : ''}>${state.aiLoading ? '...' : 'Ask'}</button>
+      </div>
+    </section>`;
+        }
+
+        function viewApply() {
+            if (state.submitted) {
+                return `
+      <section class="card" style="text-align:center">
+        <div class="dot dot-done" style="margin:0 auto 12px;width:44px;height:44px;font-size:20px">&#10003;</div>
+        <h2 class="h2">Application submitted</h2>
+        <p class="sub">A reviewer will be assigned. We will notify you when they have a question or a decision.</p>
+        <button class="btn btn-primary" data-go="home">Back to home</button>
+      </section>`;
+            }
+
+            const n = state.step;
+            const bar = `
+    <div>
+      <div class="between" style="margin-bottom:6px"><strong>Step ${n + 1} of 3</strong><span class="muted" style="font-size:13px">${['Business profile', 'Scope and products', 'Review and submit'][n]}</span></div>
+      <div class="progress" role="progressbar" aria-valuemin="1" aria-valuemax="3" aria-valuenow="${n + 1}"><i style="width:${((n + 1) / 3) * 100}%"></i></div>
+    </div>`;
+
+            let body = '';
+            if (n === 0) {
+                body = `
+      <section class="card stack">
+        <label class="field">Business name<input class="inp" data-field="name" autocomplete="organization" value="${esc(state.form.name)}"></label>
+        <label class="field">Registration number<input class="inp" data-field="reg" value="${esc(state.form.reg)}"></label>
+        <label class="field">Contact email<input class="inp" type="email" data-field="email" autocomplete="email" value="${esc(state.form.email)}"></label>
+        <label class="field">Phone<input class="inp" type="tel" data-field="phone" autocomplete="tel" value="${esc(state.form.phone)}"></label>
+      </section>`;
+            } else if (n === 1) {
+                body = `
+      <section class="card">
+        <h2 class="h2">What do you want certified?</h2>
+        <p class="sub">Choose all that apply.</p>
+        <div class="chips">${SCOPES.map((s) => `
+          <button class="btn ${state.scope[s] ? 'btn-on' : ''}" data-scope="${esc(s)}" aria-pressed="${!!state.scope[s]}">${s}</button>`).join('')}
+        </div>
+      </section>
+      <section class="card">
+        <h2 class="h2">Products</h2>
+        <p class="sub">Add each product you want on the certificate.</p>
+        <div class="row-btns" style="margin-bottom:12px">
+          <input class="inp" data-input="productDraft" aria-label="Product name" placeholder="Product name" value="${esc(state.productDraft)}">
+          <button class="btn btn-inline" style="width:auto" data-addproduct="1">Add</button>
+        </div>
+        <ul class="stack" style="gap:8px">${state.products.length ? state.products.map((p, i) => `
+          <li class="between" style="padding:8px 12px;border:1px solid #C5CBC8;border-radius:8px;background:#fff">
+            <span>${esc(p)}</span><button class="icon-btn" data-rmproduct="${i}" aria-label="Remove ${esc(p)}">&times;</button>
+          </li>`).join('') : '<li class="muted" style="font-size:13px">No products added yet.</li>'}
+        </ul>
+      </section>`;
+            } else {
+                const scopes = Object.keys(state.scope).filter((k) => state.scope[k]);
+                const missing = state.docs.length - docsReady();
+                body = `
+      <section class="card">
+        <h2 class="h2">Check your details</h2>
+        <dl>
+          <div><dt>Business</dt><dd>${esc(state.form.name) || '[Not entered]'}</dd></div>
+          <div><dt>Registration</dt><dd>${esc(state.form.reg) || '[Not entered]'}</dd></div>
+          <div><dt>Scope</dt><dd>${scopes.length ? esc(scopes.join(', ')) : '[None chosen]'}</dd></div>
+          <div><dt>Products</dt><dd>${state.products.length}</dd></div>
+        </dl>
+      </section>
+      <section class="card">
+        <h2 class="h2">AI pre-check <span class="ai">AI</span></h2>
+        <p class="sub">${missing ? missing + ' of ' + state.docs.length + ' documents still need attention. You can submit now, but review starts once they are ready.' : 'All documents look complete.'}</p>
+        <button class="btn" data-go="docs">Open documents</button>
+      </section>`;
+            }
+
+            const nav = `
+    <div class="row-btns">
+      ${n > 0 ? '<button class="btn" data-step="-1">Back</button>' : ''}
+      ${n < 2 ? '<button class="btn btn-primary" data-step="1">Next</button>' : '<button class="btn btn-primary" data-submit="1">Submit application</button>'}
+    </div>`;
+            return bar + body + nav;
+        }
+
+        function viewDocs() {
+            const ready = docsReady(), total = state.docs.length;
+            const badge = { ok: ['b-ok', 'Ready'], fix: ['b-warn', 'Needs a fix'], missing: ['b-bad', 'Missing'], processing: ['b-warn', 'Processing'] };
+
+            const detail = state.docSel === null ? '' : (() => {
+                const d = state.docs[state.docSel];
+                return `
+      <section class="card" style="border:2px solid #1E6B52">
+        <div class="between" style="margin-bottom:8px">
+          <h2 class="h2" style="margin:0">${d.name}</h2>
+          <span class="badge ${badge[d.state][0]}">${badge[d.state][1]}</span>
+        </div>
+        <p class="sub"><span class="ai">AI</span> ${d.note ? esc(d.note) : 'Not uploaded yet. Take a clear photo or choose a file and the assistant will check it.'}</p>
+        <div class="row-btns" style="margin-bottom:8px">
+          <button class="btn btn-primary" onclick="document.getElementById('file-upload').click()">Take photo</button>
+          <button class="btn" onclick="document.getElementById('file-upload').click()">Choose file</button>
+          
+          <input type="file" id="file-upload" accept="image/*,.pdf,.docx" hidden data-targetdoc="${state.docSel}">
+        </div>
+        <button class="btn" data-closedoc="1">Close</button>
+      </section>`;
+            })();
+
+            return `
+    <section class="card">
+      <div class="between" style="margin-bottom:8px"><strong>${ready} of ${total} documents ready</strong></div>
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${ready}"><i style="width:${(ready / total) * 100}%"></i></div>
+    </section>
+    ${detail}
+    <div class="stack" style="gap:8px">${state.docs.map((d, i) => `
+      <button class="list-btn ${state.docSel === i ? 'list-btn-on' : ''}" data-docsel="${i}">
+        <span><strong style="display:block">${d.name}</strong></span>
+        <span class="badge ${badge[d.state][0]}">${badge[d.state][1]}</span>
+      </button>`).join('')}
+    </div>`;
+        }
+
+        function viewMessages() {
+            const thread = state.msgs.length ? state.msgs.map((m) => `
+    <div class="bubble ${m.from === 'me' ? 'bubble-me' : ''}"><small>${m.from === 'me' ? 'You' : esc(m.who)}</small>${esc(m.text)}</div>`).join('') : '<p class="muted" style="text-align:center;font-size:13px;padding:24px">No messages yet.</p>';
+
+            const suggest = state.draft ? '' : `
+    <div style="padding:10px;border:1px solid #1E6B52;border-radius:8px;background:#fff">
+      <p style="font-size:13px;margin-bottom:8px"><span class="ai">AI</span> Draft a response to the reviewer.</p>
+      <button class="btn" data-usedraft="1">Create draft</button>
+    </div>`;
+
+            return `
+    <div class="stack">${thread}</div>
+    <div class="composer">
+      ${suggest}
+      <textarea class="inp" data-input="draft" aria-label="Your reply" placeholder="Write a message">${esc(state.draft)}</textarea>
+      <button class="btn btn-primary" data-send="1">Send</button>
+    </div>`;
+        }
+
+        function viewAudit() {
+            const done = prepCount();
+            const allDocsReady = docsReady() === state.docs.length;
+            const canCompleteAudit = state.submitted && allDocsReady && done === AUDIT_ITEMS.length;
+
+            return `
+    <section class="card">
+      <div class="between" style="margin-bottom:8px">
+        <h2 class="h2" style="margin:0">Initial audit</h2>
+        <span class="badge ${state.auditDone ? 'b-ok' : 'b-neutral'}">${state.auditDone ? 'Completed' : 'Pending'}</span>
+      </div>
+      <dl>
+        <div><dt>Date</dt><dd>${state.auditDone ? 'Completed' : 'To be scheduled'}</dd></div>
+        <div><dt>Site</dt><dd>${state.form.name ? esc(state.form.name) : '[Your Site Location]'}</dd></div>
+        <div><dt>Auditor</dt><dd>${state.auditDone ? 'Verified by Committee' : 'To be assigned'}</dd></div>
+      </dl>
+    </section>
+
+    <section class="card">
+      <div class="between" style="margin-bottom:4px">
+        <h2 class="h2" style="margin:0">Get ready <span class="ai">AI</span></h2>
+        <span class="muted" style="font-size:13px">${done} of ${AUDIT_ITEMS.length}</span>
+      </div>
+      <p class="sub">Drafted from standard requirements to help you prepare.</p>
+      ${AUDIT_ITEMS.map((l, i) => `
+        <label class="check"><input type="checkbox" data-prep="${i}" ${state.prep[i] ? 'checked' : ''} ${state.auditDone ? 'disabled' : ''}><span>${l}</span></label>`).join('')}
+    </section>
+
+    <section class="card stack">
+      <div>
+        <h2 class="h2">On the day</h2>
+        <p class="sub" style="margin:0">The auditor photographs evidence and you confirm each item on your phone. Nothing is attached without your confirmation.</p>
+      </div>
+      ${state.auditDone
+                    ? `<div style="padding:10px 12px;background:#E3F2EC;border:1px solid #8FC3AE;border-radius:8px;color:#14533F;font-size:13px;font-weight:600;text-align:center">
+             &#10003; Audit visit &amp; committee approval completed.
+           </div>`
+                    : `<button class="btn btn-primary" data-completeaudit="1" ${!canCompleteAudit ? 'disabled style="opacity:0.5;cursor:not-allowed"' : ''}>
+             ${canCompleteAudit ? 'Confirm Audit Visit Completed' : 'Complete application, docs &amp; checklist first'}
+           </button>`
+                }
+    </section>`;
+        }
+
+        function viewCertificate() {
+            const scopes = Object.keys(state.scope).filter((k) => state.scope[k]);
+            const canPay = isReadyForPayment();
+            const missingDocs = state.docs.length - docsReady();
+
+            // Build a clear checklist of remaining steps if not ready for payment
+            const pendingSteps = [];
+            if (!state.submitted) pendingSteps.push('Submit your application');
+            if (missingDocs > 0) pendingSteps.push(`Get ${missingDocs} more document${missingDocs === 1 ? '' : 's'} approved by AI`);
+            if (!state.auditDone) pendingSteps.push('Complete the Audit visit checklist & confirmation');
+
+            // 1. LOCKED VIEW: Require all processes + ₱500 payment before viewing certificate details
+            if (!state.certPaid) {
+                return `
+      <section class="card" style="text-align:center; border:2px solid ${canPay ? '#E0B84F' : '#C5CBC8'}">
+        <span class="badge ${canPay ? 'b-warn' : 'b-neutral'}">${canPay ? 'Payment Required' : 'Processes Incomplete'}</span>
+        <h2 style="margin:8px 0 4px;font-size:20px;font-weight:600">Halal Certificate</h2>
+        <p class="muted" style="margin-bottom:16px">${state.form.name ? esc(state.form.name) : '[Your company name]'}</p>
+        
+        <div class="qr mono locked-blur">QR LOCKED</div>
+        
+        <p class="sub" style="margin:16px 0 12px">
+          ${canPay
+                        ? 'All accreditation processes are complete! To unlock, view, and download your official Halal Certificate, please settle the certificate issuance fee of <strong>₱500.00</strong>.'
+                        : `You must complete all accreditation processes before payment is enabled:<br><strong style="display:block;margin-top:6px;color:#8C1D1D">${pendingSteps.join(' &middot; ')}</strong>`
+                    }
+        </p>
+        <button class="btn btn-primary" data-paycert="1" ${!canPay ? 'disabled style="opacity:0.5;cursor:not-allowed"' : ''}>
+          Pay ₱500.00 to View Certificate
+        </button>
+      </section>
+
+      <section class="card">
+        <div class="between" style="margin-bottom:8px">
+          <h2 class="h2" style="margin:0">Certificate Details</h2>
+          <span class="badge b-neutral">Locked</span>
+        </div>
+        <dl class="locked-blur">
+          <div><dt>Number</dt><dd class="mono">HALAL-2026-0001</dd></div>
+          <div><dt>Scope</dt><dd>Food manufacturing</dd></div>
+          <div><dt>Valid until</dt><dd>10 Nov 2027</dd></div>
+        </dl>
+      </section>
+
+      <section class="card">
+        <div class="between" style="margin-bottom:4px">
+          <h2 class="h2" style="margin:0">Renewal <span class="ai">AI</span></h2>
+          <span class="badge b-neutral">Unavailable</span>
+        </div>
+        <p class="sub" style="margin:0">Unlock your current certificate first. Renewal requires a separate fee upon expiration.</p>
+      </section>`;
+            }
+
+            // 2. UNLOCKED VIEW: Certificate is paid and viewable, with separate Renewal payment
+            return `
+    <section class="card" style="text-align:center">
+      <span class="badge b-ok">Active &middot; Paid</span>
+      <h2 style="margin:8px 0 2px;font-size:20px;font-weight:600">Halal Certificate</h2>
+      <p class="muted" style="margin-bottom:16px">${state.form.name ? esc(state.form.name) : '[Your company name]'}</p>
+      <div class="qr mono">QR CODE</div>
+      <p class="sub" style="margin:8px 0 0">Shoppers scan this to check your status live.</p>
+    </section>
+
+    <section class="card">
+      <dl>
+        <div><dt>Number</dt><dd class="mono">${state.form.reg ? 'HC-' + esc(state.form.reg) : '[Pending Approval]'}</dd></div>
+        <div><dt>Scope</dt><dd>${scopes.length ? esc(scopes.join(', ')) : '[Pending]'}</dd></div>
+        <div><dt>Valid until</dt><dd>${state.renewalPaid ? 'Extended (+1 Year)' : '1 Year from Issuance'}</dd></div>
+      </dl>
+      <p style="margin:12px 0 8px;font-size:13px;font-weight:600;color:#4F5754">Certified products</p>
+      <div class="stack" style="gap:6px">
+        ${state.products.length
+                    ? state.products.map(p => `<div style="font-size:14px;padding:6px 10px;background:#F2F8F5;border:1px solid #8FC3AE;border-radius:6px">${esc(p)}</div>`).join('')
+                    : '<p class="muted" style="font-size:13px; margin:0;">No products listed yet.</p>'}
+      </div>
+    </section>
+
+    <section class="card stack" style="gap:8px">
+      <button class="btn btn-primary" data-notice="Downloading your Halal Certificate PDF...">Download PDF</button>
+      <button class="btn" data-notice="Verification link copied to clipboard!">Share verification link</button>
+      <button class="btn" data-go="messages">Report a change to ingredients or suppliers</button>
+    </section>
+
+    <section class="card">
+      <div class="between" style="margin-bottom:4px">
+        <h2 class="h2" style="margin:0">Renewal <span class="ai">AI</span></h2>
+        <span class="badge ${state.renewalPaid ? 'b-ok' : 'b-warn'}">${state.renewalPaid ? 'Renewal Paid' : 'Separate Fee'}</span>
+      </div>
+      <p class="sub">We will remind you before this certificate expires and pre-fill your renewal from this application. Renewing requires a separate payment.</p>
+      ${state.renewalPaid
+                    ? `<div style="padding:10px 12px;background:#E3F2EC;border:1px solid #8FC3AE;border-radius:8px;color:#14533F;font-size:13px;font-weight:600;text-align:center">
+             &#10003; Renewal fee paid. Your renewal application is queued for review.
+           </div>`
+                    : `<button class="btn btn-primary" data-payrenew="1">Pay ₱500.00 Renewal Fee</button>`
+                }
+    </section>`;
+        }
+
+        const VIEWS = { home: viewHome, apply: viewApply, docs: viewDocs, messages: viewMessages, certificate: viewCertificate, audit: viewAudit };
+
+        /* ------------------------------------------------------------------
+           Render
+        ------------------------------------------------------------------- */
+        function render() {
+            const tabFor = state.screen === 'audit' ? 'home' : state.screen;
+            $('title').textContent = TITLES[state.screen];
+            $('back').hidden = state.screen !== 'audit';
+            $('view').innerHTML = VIEWS[state.screen]();
+            $('tabs').innerHTML = TABS.map((t) => `
+    <button class="tab ${t.id === tabFor ? 'tab-on' : ''}" data-go="${t.id}" ${t.id === tabFor ? 'aria-current="page"' : ''}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true">${t.icon}</svg>${t.label}
+    </button>`).join('');
+
+            $('modal').innerHTML = state.modal ? `
+    <div class="modal-backdrop">
+      <div class="modal-box stack">
+        <h3 class="h2" style="margin:0">${esc(state.modal.title)}</h3>
+        <p class="sub" style="margin:0">${esc(state.modal.text)}</p>
+        <div class="row-btns">
+          ${state.modal.confirmAction ? `<button class="btn" data-modalcancel="1">Cancel</button>` : ''}
+          <button class="btn btn-primary" data-modalok="${state.modal.confirmAction || 'close'}">${state.modal.confirmLabel || 'OK'}</button>
+        </div>
+      </div>
+    </div>` : '';
+        }
+
+        function go(screen) {
+            state.screen = screen;
+            render();
+            window.scrollTo(0, 0);
+        }
+
+        async function askAssistant() {
+            const q = state.aiQuestion.trim();
+            if (!q || state.aiLoading) return;
+
+            state.aiChat.push({ role: 'user', text: q });
+            state.aiQuestion = '';
+            state.aiLoading = true;
+            render();
+
+            try {
+                const response = await fetch("http://localhost:3000/api/ask", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        question: q,
+                        docs: state.docs,
+                        businessName: state.form.name
+                    })
+                });
+
+                if (!response.ok) throw new Error("Backend error");
+                const data = await response.json();
+                state.aiChat.push({ role: 'ai', text: data.reply || 'No response received.' });
+            } catch (err) {
+                console.error(err);
+                state.aiChat.push({ role: 'ai', text: 'Connection failed. Make sure your Node.js server has the /api/ask route and is running on port 3000.' });
+            } finally {
+                state.aiLoading = false;
+                render();
+            }
+        }
+
+        /* ------------------------------------------------------------------
+           Events
+        ------------------------------------------------------------------- */
+        document.addEventListener('click', (e) => {
+            const el = e.target.closest('button');
+            if (!el || el.disabled) return;
+            const d = el.dataset;
+
+            if (el.id === 'back') return go('home');
+            if (d.go) return go(d.go);
+
+            if (d.step) { state.step = Math.max(0, Math.min(2, state.step + Number(d.step))); render(); return window.scrollTo(0, 0); }
+            if (d.scope) { state.scope[d.scope] = !state.scope[d.scope]; return render(); }
+            if (d.addproduct) {
+                const v = state.productDraft.trim();
+                if (v) { state.products.push(v); state.productDraft = ''; }
+                return render();
+            }
+            if (d.rmproduct !== undefined) { state.products.splice(Number(d.rmproduct), 1); return render(); }
+            if (d.submit) { state.submitted = true; render(); return window.scrollTo(0, 0); }
+
+            if (d.docsel !== undefined) { state.docSel = Number(d.docsel); return render(); }
+            if (d.closedoc) { state.docSel = null; return render(); }
+
+            if (d.usedraft) {
+                state.draft = '[Type your message or update here]';
+                return render();
+            }
+            if (d.send) {
+                const v = state.draft.trim();
+                if (v) { state.msgs.push({ from: 'me', text: v }); state.draft = ''; }
+                return render();
+            }
+
+            if (d.askai) {
+                askAssistant();
+                return;
+            }
+
+            if (d.notice) {
+                state.modal = { title: 'Notification', text: d.notice };
+                return render();
+            }
+
+            if (d.completeaudit) {
+                if (state.submitted && docsReady() === state.docs.length && prepCount() === AUDIT_ITEMS.length) {
+                    state.auditDone = true;
+                    render();
+                }
+                return;
+            }
+
+            // Handle ₱500 payment to unlock & view the certificate (guarded by process completion)
+            if (d.paycert) {
+                if (!isReadyForPayment()) return;
+                state.modal = {
+                    title: 'Certificate Issuance Fee',
+                    text: 'Proceed with ₱500.00 payment to unlock and view your Halal Certificate?',
+                    confirmAction: 'paycert',
+                    confirmLabel: 'Pay ₱500.00'
+                };
+                return render();
+            }
+
+            // Handle separate ₱500 payment for certificate renewal
+            if (d.payrenew) {
+                state.modal = {
+                    title: 'Certificate Renewal Fee',
+                    text: 'Proceed with a separate ₱500.00 payment to renew your Halal Certificate?',
+                    confirmAction: 'payrenew',
+                    confirmLabel: 'Pay ₱500.00'
+                };
+                return render();
+            }
+
+            if (d.modalcancel) {
+                state.modal = null;
+                return render();
+            }
+
+            if (d.modalok) {
+                const act = d.modalok;
+                state.modal = null;
+                if (act === 'paycert') {
+                    state.certPaid = true;
+                    window.scrollTo(0, 0);
+                } else if (act === 'payrenew') {
+                    state.renewalPaid = true;
+                }
+                return render();
+            }
+        });
+
+        // Allow pressing Enter in the Ask Assistant input box
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.target.dataset.input === 'aiQuestion') {
+                e.preventDefault();
+                askAssistant();
+            }
+        });
+
+        /* Typing updates state only (no re-render), so the cursor never jumps */
+        document.addEventListener('input', (e) => {
+            const t = e.target;
+            if (t.dataset.field) state.form[t.dataset.field] = t.value;
+            if (t.dataset.input) state[t.dataset.input] = t.value;
+        });
+
+        // Capture File Upload and Checkbox Changes
+        document.addEventListener('change', async (e) => {
+            const t = e.target;
+
+            if (t.dataset.prep !== undefined) {
+                state.prep[t.dataset.prep] = t.checked;
+                render();
+            }
+
+            // Handle Document Uploads via AI
+            if (t.id === 'file-upload' && t.files.length > 0) {
+                const file = t.files[0];
+                const docIndex = Number(t.dataset.targetdoc);
+                const doc = state.docs[docIndex];
+
+                // UI Loading State
+                doc.state = 'processing';
+                doc.note = "AI is analyzing your document... Please wait.";
+                render();
+
+                // Package the file for the backend
+                const formData = new FormData();
+                formData.append("document", file);
+                formData.append("documentType", doc.name);
+
+                try {
+                    const response = await fetch("http://localhost:3000/api/analyze", {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    if (!response.ok) throw new Error("Backend error");
+
+                    const result = await response.json();
+                    doc.state = result.state;
+                    doc.note = result.note;
+
+                } catch (error) {
+                    console.error(error);
+                    doc.state = "fix";
+                    doc.note = "Connection failed. Make sure your Node.js server is running and CORS is enabled.";
+                }
+
+                // Update the UI with final result
+                render();
+            }
+        });
+
+        render();
+    </script>
+</body>
+
+</html>
